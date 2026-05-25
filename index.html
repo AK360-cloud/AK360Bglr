@@ -1,183 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>AK360 Virtual Tours</title>
 
 <style>
 
 /* RESET */
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-font-family:Segoe UI,sans-serif;
+font-family:Segoe UI;
 background:#050816;
 color:white;
-overflow-x:hidden;
 }
 
-/* 🌍 HERO */
+/* HERO */
 .hero{
-position:relative;
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
+position:relative;
 text-align:center;
-overflow:hidden;
 }
 
-/* 🌍 EARTH */
 .earth{
 position:absolute;
-width:700px;
-height:700px;
+width:600px;
+height:600px;
 border-radius:50%;
-
 background:url('https://upload.wikimedia.org/wikipedia/commons/7/7f/Rotating_earth_animated_transparent.gif');
 background-size:cover;
-
-filter:brightness(1.8) contrast(1.2) saturate(1.4);
-
-box-shadow:
-0 0 120px rgba(0,212,255,0.5),
-0 0 220px rgba(108,99,255,0.3);
-
-animation:floatEarth 8s ease-in-out infinite;
+filter:brightness(1.6) contrast(1.2);
+animation:float 8s infinite ease-in-out;
 }
 
-@keyframes floatEarth{
-0%{transform:translateY(0px);}
-50%{transform:translateY(-15px) scale(1.03);}
-100%{transform:translateY(0px);}
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-15px);}
+100%{transform:translateY(0);}
 }
 
-/* OVERLAY */
 .overlay{
 position:absolute;
 inset:0;
 background:radial-gradient(circle,rgba(5,8,22,0.1),rgba(5,8,22,0.95));
 }
 
-/* HERO TEXT */
-.hero-content{
-position:relative;
-z-index:10;
-}
-
-.logo-text{
+/* LOGO */
+.logo{
 font-size:5rem;
 font-weight:900;
-color:#00f7ff;
-text-shadow:
-0 0 10px #00f7ff,
-0 0 25px #00d4ff,
-0 0 60px #6c63ff;
-animation:neonPulse 2.5s infinite alternate;
+color:#b400ff;
+text-shadow:0 0 10px #b400ff,0 0 40px #7a00ff;
+animation:neon 2.5s infinite alternate;
+z-index:2;
+position:relative;
 }
 
-@keyframes neonPulse{
-0%{text-shadow:0 0 10px #00f7ff;}
-100%{text-shadow:0 0 40px #00d4ff;}
+@keyframes neon{
+0%{text-shadow:0 0 10px #b400ff;}
+100%{text-shadow:0 0 40px #7a00ff;}
 }
 
-/* SECTION */
-.section-title{
-text-align:center;
-font-size:2.5rem;
-margin:40px 0;
-}
-
-/* CATEGORIES */
-.categories-grid{
+/* GRID */
+.grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
 gap:20px;
-padding:40px;
+padding:30px;
 }
 
-.category-card{
+.card{
 background:rgba(255,255,255,0.05);
-border-radius:20px;
+border-radius:15px;
 overflow:hidden;
 cursor:pointer;
 transition:0.3s;
-}
-
-.category-card:hover{
-transform:translateY(-10px);
-border:1px solid #00d4ff;
-}
-
-.category-image{
-width:100%;
-height:160px;
-object-fit:cover;
-}
-
-.category-name{
-padding:15px;
 text-align:center;
 }
 
-/* ACTIVE */
-.category-card.active{
-border:1px solid #00f7ff;
-transform:scale(1.03);
+.card:hover{
+transform:translateY(-10px);
+border:1px solid #b400ff;
+}
+
+.card img{
+width:100%;
+height:130px;
+object-fit:cover;
+}
+
+.card h3{
+padding:10px;
 }
 
 /* TOURS */
-.tours-section{
-padding:50px 20px;
+.tours{
+padding:40px;
 background:#0d1224;
 }
 
-.tours-grid{
+.tour-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:20px;
 }
 
-/* TOUR CARD */
 .tour-card{
 position:relative;
 background:rgba(255,255,255,0.05);
-border-radius:20px;
+border-radius:15px;
 overflow:hidden;
 }
 
-/* DETAILS BUTTON */
+/* GET DETAILS */
 .details-btn{
 position:absolute;
 top:10px;
 right:10px;
 padding:6px 10px;
 font-size:12px;
-text-decoration:none;
-color:#00f7ff;
-
-background:rgba(0,0,0,0.6);
-border:1px solid #00f7ff;
+color:#b400ff;
+border:1px solid #b400ff;
 border-radius:20px;
-
+text-decoration:none;
+background:rgba(0,0,0,0.6);
 animation:glow 1.5s infinite alternate;
 }
 
 @keyframes glow{
-0%{box-shadow:0 0 5px #00d4ff;}
-100%{box-shadow:0 0 20px #00f7ff;}
+0%{box-shadow:0 0 5px #b400ff;}
+100%{box-shadow:0 0 20px #7a00ff;}
 }
 
-.tour-thumbnail{
+.tour-img{
 width:100%;
-height:200px;
+height:180px;
 object-fit:cover;
 }
 
@@ -190,11 +151,16 @@ display:block;
 margin-top:10px;
 text-align:center;
 padding:10px;
-background:linear-gradient(135deg,#00d4ff,#6c63ff);
-color:black;
-font-weight:bold;
+background:linear-gradient(135deg,#b400ff,#7a00ff);
+color:white;
 border-radius:10px;
 text-decoration:none;
+}
+
+.section-title{
+text-align:center;
+margin:20px 0;
+font-size:2rem;
 }
 
 </style>
@@ -206,92 +172,132 @@ text-decoration:none;
 <section class="hero">
 <div class="earth"></div>
 <div class="overlay"></div>
-
-<div class="hero-content">
-<h1 class="logo-text">AK360</h1>
-</div>
+<h1 class="logo">AK360</h1>
 </section>
 
 <h2 class="section-title">Explore Categories</h2>
 
-<div class="categories-grid">
+<div class="grid">
 
-<div class="category-card" data-category="apartments">
-<img class="category-image" src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800">
-<div class="category-name">Apartments</div>
+<div class="card" onclick="load('gyms')">
+<img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800">
+<h3>Gyms</h3>
 </div>
 
-<div class="category-card" data-category="hotel">
-<img class="category-image" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800">
-<div class="category-name">Hotels</div>
+<div class="card" onclick="load('hotels')">
+<img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800">
+<h3>Hotels</h3>
+</div>
+
+<div class="card" onclick="load('restaurants')">
+<img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800">
+<h3>Restaurants</h3>
+</div>
+
+<div class="card" onclick="load('apartments')">
+<img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800">
+<h3>Apartments</h3>
+</div>
+
+<div class="card" onclick="load('flats')">
+<img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800">
+<h3>Flats</h3>
+</div>
+
+<div class="card" onclick="load('hospitals')">
+<img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=800">
+<h3>Hospitals</h3>
+</div>
+
+<div class="card" onclick="load('spas')">
+<img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800">
+<h3>Spas</h3>
+</div>
+
+<div class="card" onclick="load('salons')">
+<img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800">
+<h3>Salons</h3>
+</div>
+
+<div class="card" onclick="load('others')">
+<img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800">
+<h3>Others</h3>
 </div>
 
 </div>
 
-<section class="tours-section">
-
+<!-- TOURS -->
+<section class="tours">
 <h2 class="section-title" id="title">Select Category</h2>
-
-<div class="tours-grid" id="grid"></div>
-
+<div class="tour-grid" id="grid"></div>
 </section>
 
 <script>
 
-const data={
-apartments:[
-{
-title:"Luxury Apartment",
-desc:"Premium 360° apartment tour",
-img:"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800",
-url:"#",
-details:"details.html"
-}
+const data = {
+
+gyms:[
+{ id:"g1", title:"Modern Gym", desc:"360° gym tour", img:"https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800" }
 ],
-hotel:[
-{
-title:"Luxury Hotel",
-desc:"5-star hotel walkthrough",
-img:"https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
-url:"#",
-details:"details.html"
-}
+
+hotels:[
+{ id:"h1", title:"Luxury Hotel", desc:"5 star hotel tour", img:"https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800" }
+],
+
+restaurants:[
+{ id:"r1", title:"Fine Dining", desc:"Restaurant virtual tour", img:"https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800" }
+],
+
+apartments:[
+{ id:"a1", title:"Luxury Apartment", desc:"Modern apartment tour", img:"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800" }
+],
+
+flats:[
+{ id:"f1", title:"Premium Flat", desc:"Flat walkthrough", img:"https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800" }
+],
+
+hospitals:[
+{ id:"hp1", title:"Hospital Tour", desc:"Healthcare facility tour", img:"https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=800" }
+],
+
+spas:[
+{ id:"s1", title:"Luxury Spa", desc:"Relaxing spa tour", img:"https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800" }
+],
+
+salons:[
+{ id:"sl1", title:"Salon Tour", desc:"Beauty salon walkthrough", img:"https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800" }
+],
+
+others:[
+{ id:"o1", title:"Other Spaces", desc:"Misc virtual tour", img:"https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800" }
 ]
+
 };
 
-const cards=document.querySelectorAll(".category-card");
-const grid=document.getElementById("grid");
-const title=document.getElementById("title");
+function load(cat){
 
-cards.forEach(c=>{
-c.onclick=()=>{
+document.getElementById("title").innerText = cat.toUpperCase()+" TOURS";
 
-cards.forEach(x=>x.classList.remove("active"));
-c.classList.add("active");
-
-let cat=c.dataset.category;
-title.innerText=cat.toUpperCase()+" TOURS";
-
-grid.innerHTML=data[cat].map(t=>`
+document.getElementById("grid").innerHTML =
+data[cat].map(t=>`
 <div class="tour-card">
 
-<a class="details-btn" href="${t.details}">
+<a class="details-btn" href="details.html?id=${t.id}">
 ✨ Get Details
 </a>
 
-<img class="tour-thumbnail" src="${t.img}">
+<img class="tour-img" src="${t.img}">
 
 <div class="tour-content">
 <h3>${t.title}</h3>
 <p>${t.desc}</p>
-<a class="tour-btn" href="${t.url}">View Tour</a>
+<a class="tour-btn" href="#">View Tour</a>
 </div>
 
 </div>
 `).join("");
 
 }
-});
 
 </script>
 
