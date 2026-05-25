@@ -1,15 +1,620 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>AK360</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>AK360 Virtual Tours</title>
+
+    <!-- SEO -->
+    <meta
+        name="description"
+        content="AK360 Virtual Tours - 360° Virtual Tours and Digital Marketing Services in Bangalore and across India."
+    />
+
+    <meta
+        name="keywords"
+        content="360 virtual tours, virtual tour Bangalore, digital marketing, google street view, AK360"
+    />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a25;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --accent: #00d4ff;
+            --gradient-start: #667eea;
+            --gradient-end: #764ba2;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #globe-canvas {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, transparent 20%, #0a0a0f 75%);
+        }
+
+        .hero-content {
+            z-index: 2;
+            padding: 20px;
+        }
+
+        .logo {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(
+                135deg,
+                var(--accent),
+                var(--gradient-start),
+                var(--gradient-end)
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            margin-top: 15px;
+            font-size: 1.4rem;
+            color: var(--text-secondary);
+        }
+
+        /* BUTTON */
+        .demo-section {
+            padding: 80px 20px;
+            text-align: center;
+            background: var(--bg-secondary);
+        }
+
+        .demo-btn {
+            display: inline-block;
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: black;
+            background: linear-gradient(
+                135deg,
+                var(--accent),
+                var(--gradient-start)
+            );
+            transition: 0.3s;
+        }
+
+        .demo-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* SECTION */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            padding-top: 40px;
+        }
+
+        /* CATEGORY */
+        .categories-section {
+            padding: 40px 20px 80px;
+            background: var(--bg-primary);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .category-card {
+            background: var(--bg-card);
+            padding: 30px 20px;
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .category-card:hover,
+        .category-card.active {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .category-icon {
+            width: 80px;
+            height: 80px;
+            margin: auto;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            background: linear-gradient(
+                135deg,
+                var(--gradient-start),
+                var(--gradient-end)
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-icon svg {
+            width: 40px;
+            fill: white;
+        }
+
+        .category-name {
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* TOURS */
+        .tours-section {
+            padding: 40px 20px 80px;
+            background: var(--bg-secondary);
+        }
+
+        .tours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .tour-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .tour-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tour-thumbnail img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .tour-content {
+            padding: 20px;
+        }
+
+        .tour-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .tour-description {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .tour-btn {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            background: linear-gradient(
+                135deg,
+                var(--accent),
+                var(--gradient-start)
+            );
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            background: #09090d;
+            color: var(--text-secondary);
+        }
+
+        /* WHATSAPP */
+        .whatsapp-btn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: #25d366;
+            color: white;
+            padding: 14px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 999;
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<h1>AK360 Virtual Tours</h1>
+    <!-- HERO -->
+    <section class="hero">
 
-<ul>
-  <li><a href="tours/b001/">Open Tour B001</a></li>
-</ul>
+        <canvas id="globe-canvas"></canvas>
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+
+            <!-- LOGO -->
+            <!-- Replace logo.png with your real logo -->
+            <img
+                src="logo.png"
+                alt="AK360 Logo"
+                style="width: 180px; margin-bottom: 20px;"
+            />
+
+            <h1 class="logo">AK360</h1>
+
+            <p class="tagline">
+                Immersive 360° Virtual Tours & Digital Marketing
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- DEMO -->
+    <section class="demo-section">
+
+        <a
+            href="https://ak360bglr1.pages.dev/tour/demo/"
+            target="_blank"
+            class="demo-btn"
+        >
+            Quick Demo
+        </a>
+
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="categories-section">
+
+        <h2 class="section-title">Explore Categories</h2>
+
+        <div class="categories-grid">
+
+            <div class="category-card" data-category="hotel">
+                <div class="category-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3z"/>
+                    </svg>
+                </div>
+                <div class="category-name">HOTEL</div>
+            </div>
+
+            <div class="category-card" data-category="gym">
+                <div class="category-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20.57 14.86L22 13.43 20.57 12z"/>
+                    </svg>
+                </div>
+                <div class="category-name">GYM</div>
+            </div>
+
+            <div class="category-card" data-category="apartments">
+                <div class="category-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M17 11V3H7v4H3v14h18V11z"/>
+                    </svg>
+                </div>
+                <div class="category-name">APARTMENTS</div>
+            </div>
+
+            <div class="category-card" data-category="flats">
+                <div class="category-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                </div>
+                <div class="category-name">FLATS</div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- TOURS -->
+    <section class="tours-section">
+
+        <h2 class="section-title" id="tours-title">
+            Select a Category
+        </h2>
+
+        <div class="tours-grid" id="tours-grid"></div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>© 2025 AK360 Virtual Tours. All rights reserved.</p>
+
+        <div style="margin-top:20px;">
+            <p>📞 +91 7306639732</p>
+            <p>📍 Bangalore | All India</p>
+            <p>
+                ▶
+                <a
+                    href="https://www.youtube.com/channel/UCaWqDmJPPrY_t8WSLYSO-eQ"
+                    target="_blank"
+                    style="color:#00d4ff;text-decoration:none;"
+                >
+                    YouTube Channel
+                </a>
+            </p>
+        </div>
+
+    </footer>
+
+    <!-- WHATSAPP -->
+    <a
+        href="https://wa.me/917306639732"
+        target="_blank"
+        class="whatsapp-btn"
+    >
+        WhatsApp
+    </a>
+
+    <script>
+
+        // GLOBE ANIMATION
+
+        const canvas = document.getElementById("globe-canvas");
+        const ctx = canvas.getContext("2d");
+
+        let width, height, centerX, centerY, radius;
+        let rotation = 0;
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+
+            centerX = width / 2;
+            centerY = height / 2;
+
+            radius = Math.min(width, height) * 0.3;
+        }
+
+        resizeCanvas();
+
+        window.addEventListener("resize", resizeCanvas);
+
+        function drawGlobe() {
+
+            ctx.clearRect(0, 0, width, height);
+
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+
+            ctx.strokeStyle = "rgba(0,212,255,0.2)";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            for (let i = 0; i < 8; i++) {
+
+                const angle = i * Math.PI / 4 + rotation;
+
+                ctx.save();
+
+                ctx.translate(centerX, centerY);
+                ctx.rotate(angle);
+
+                ctx.beginPath();
+
+                ctx.ellipse(
+                    0,
+                    0,
+                    radius * 0.15,
+                    radius,
+                    0,
+                    0,
+                    Math.PI * 2
+                );
+
+                ctx.strokeStyle = "rgba(102,126,234,0.2)";
+                ctx.stroke();
+
+                ctx.restore();
+            }
+
+            rotation += 0.005;
+
+            requestAnimationFrame(drawGlobe);
+        }
+
+        drawGlobe();
+
+        // TOURS DATA
+
+        const toursData = {
+
+            hotel: [
+                {
+                    title: "Grand Plaza Hotel",
+                    description: "Luxury hotel virtual tour experience.",
+                    thumbnail:
+                        "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400",
+                    url:
+                        "https://ak360bglr1.pages.dev/tour/h001/"
+                }
+            ],
+
+            gym: [
+                {
+                    title: "FitZone Gym",
+                    description: "Premium gym and fitness center.",
+                    thumbnail:
+                        "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400",
+                    url:
+                        "https://ak360bglr1.pages.dev/tour/g001/"
+                }
+            ],
+
+            apartments: [
+                {
+                    title: "Skyline Apartments",
+                    description: "Modern apartment walkthrough.",
+                    thumbnail:
+                        "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400",
+                    url:
+                        "https://ak360bglr1.pages.dev/tour/a001/"
+                }
+            ],
+
+            flats: [
+                {
+                    title: "Premium Flat",
+                    description: "Beautiful flat interior tour.",
+                    thumbnail:
+                        "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=400",
+                    url:
+                        "https://ak360bglr1.pages.dev/tour/f001/"
+                }
+            ]
+        };
+
+        // CATEGORY CLICK
+
+        const categoryCards =
+            document.querySelectorAll(".category-card");
+
+        const toursGrid =
+            document.getElementById("tours-grid");
+
+        const toursTitle =
+            document.getElementById("tours-title");
+
+        categoryCards.forEach(card => {
+
+            card.addEventListener("click", () => {
+
+                categoryCards.forEach(c =>
+                    c.classList.remove("active")
+                );
+
+                card.classList.add("active");
+
+                const category =
+                    card.dataset.category;
+
+                toursTitle.innerText =
+                    category.toUpperCase() + " TOURS";
+
+                renderTours(category);
+
+                document
+                    .querySelector(".tours-section")
+                    .scrollIntoView({
+                        behavior: "smooth"
+                    });
+            });
+        });
+
+        function renderTours(category) {
+
+            const tours =
+                toursData[category] || [];
+
+            toursGrid.innerHTML =
+                tours.map(tour => `
+
+                <div class="tour-card">
+
+                    <div class="tour-thumbnail">
+                        <img src="${tour.thumbnail}" alt="${tour.title}">
+                    </div>
+
+                    <div class="tour-content">
+
+                        <h3 class="tour-title">
+                            ${tour.title}
+                        </h3>
+
+                        <p class="tour-description">
+                            ${tour.description}
+                        </p>
+
+                        <a
+                            href="${tour.url}"
+                            target="_blank"
+                            class="tour-btn"
+                        >
+                            View Tour
+                        </a>
+
+                    </div>
+
+                </div>
+
+            `).join("");
+        }
+
+    </script>
 
 </body>
 </html>
