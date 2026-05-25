@@ -6,6 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AK360 Virtual Tours</title>
 
+<!-- Font Awesome for WhatsApp icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
 
 /* RESET */
@@ -24,22 +27,49 @@ position:fixed;
 top:0;
 left:0;
 width:100%;
-padding:15px 20px;
+padding:12px 20px;
 z-index:1000;
+
 display:flex;
-justify-content:center;
+justify-content:space-between;
+align-items:center;
+
 background:rgba(5,8,22,0.6);
-backdrop-filter:blur(10px);
+backdrop-filter:blur(12px);
 border-bottom:1px solid rgba(255,255,255,0.08);
 }
 
-header h1{
-font-size:1.8rem;
+/* LOGO */
+.logo-left{
+font-size:1.6rem;
 font-weight:900;
 background:linear-gradient(90deg,#00d4ff,#ff4df0);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 letter-spacing:2px;
+}
+
+/* WHATSAPP ICON */
+.whatsapp-icon{
+font-size:1.5rem;
+color:#25d366;
+width:42px;
+height:42px;
+display:flex;
+justify-content:center;
+align-items:center;
+
+border-radius:50%;
+background:rgba(37,211,102,0.12);
+border:1px solid rgba(37,211,102,0.4);
+
+text-decoration:none;
+transition:0.3s;
+}
+
+.whatsapp-icon:hover{
+transform:scale(1.08);
+box-shadow:0 0 15px rgba(37,211,102,0.5);
 }
 
 /* HERO */
@@ -77,16 +107,6 @@ inset:0;
 background:radial-gradient(circle,rgba(5,8,22,0.1),rgba(5,8,22,0.95));
 }
 
-.logo{
-font-size:4rem;
-font-weight:900;
-background:linear-gradient(90deg,#00d4ff,#ff4df0);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-z-index:2;
-position:relative;
-}
-
 /* GRID */
 .section-title{
 text-align:center;
@@ -99,6 +119,7 @@ display:grid;
 grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
 gap:15px;
 padding:20px;
+margin-top:10px;
 }
 
 .card{
@@ -177,6 +198,7 @@ padding:40px 20px;
 text-align:center;
 background:#03050d;
 color:#b8c0d0;
+margin-top:20px;
 }
 
 footer a{
@@ -184,6 +206,7 @@ color:#00d4ff;
 text-decoration:none;
 }
 
+/* WHATSAPP FLOAT */
 .whatsapp{
 position:fixed;
 right:20px;
@@ -197,9 +220,10 @@ text-decoration:none;
 z-index:999;
 }
 
+/* MOBILE */
 @media(max-width:768px){
 .earth{width:420px;height:420px;}
-.logo{font-size:2.8rem;}
+.logo-left{font-size:1.3rem;}
 }
 
 </style>
@@ -209,14 +233,19 @@ z-index:999;
 
 <!-- HEADER -->
 <header>
-<h1>AK360</h1>
+<div class="logo-left">AK360</div>
+
+<a class="whatsapp-icon"
+   href="https://wa.me/917306639732"
+   target="_blank">
+<i class="fa-brands fa-whatsapp"></i>
+</a>
 </header>
 
 <!-- HERO -->
 <section class="hero">
 <div class="earth"></div>
 <div class="overlay"></div>
-<h1 class="logo">AK360</h1>
 </section>
 
 <h2 class="section-title">Explore Categories</h2>
@@ -290,6 +319,7 @@ Chat on WhatsApp
 </p>
 </footer>
 
+<!-- FLOAT WHATSAPP -->
 <a class="whatsapp" href="https://wa.me/917306639732">WhatsApp</a>
 
 <script>
@@ -305,11 +335,11 @@ hotels:[
 ],
 
 restaurants:[
-{ id:"r1", title:"Fine Dining Restaurant", desc:"Premium food experience", img:"https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800", url:"/tour/r001/" }
+{ id:"r1", title:"Fine Dining", desc:"Restaurant tour experience", img:"https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800", url:"/tour/r001/" }
 ],
 
 apartments:[
-{ id:"a1", title:"Sunrise Residency Apartment", desc:"Luxury 3BHK apartment tour", img:"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800", url:"/tour/b001/" }
+{ id:"a1", title:"Sunrise Residency", desc:"Premium apartment tour", img:"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800", url:"/tour/b001/" }
 ],
 
 flats:[
@@ -317,19 +347,19 @@ flats:[
 ],
 
 hospitals:[
-{ id:"hp1", title:"City Care Hospital", desc:"Healthcare facility tour", img:"https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=800", url:"/tour/hp001/" }
+{ id:"hp1", title:"City Hospital", desc:"Healthcare tour", img:"https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=800", url:"/tour/hp001/" }
 ],
 
 spas:[
-{ id:"s1", title:"Luxury Spa", desc:"Relaxing wellness spa", img:"https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800", url:"/tour/s001/" }
+{ id:"s1", title:"Luxury Spa", desc:"Relax spa experience", img:"https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800", url:"/tour/s001/" }
 ],
 
 salons:[
-{ id:"sl1", title:"Premium Salon", desc:"Beauty salon experience", img:"https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800", url:"/tour/sl001/" }
+{ id:"sl1", title:"Salon Experience", desc:"Beauty salon tour", img:"https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800", url:"/tour/sl001/" }
 ],
 
 others:[
-{ id:"o1", title:"Other Space", desc:"Misc virtual tour", img:"https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800", url:"/tour/o001/" }
+{ id:"o1", title:"Other Spaces", desc:"Misc virtual tour", img:"https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800", url:"/tour/o001/" }
 ]
 
 };
