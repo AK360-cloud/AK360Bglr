@@ -2,564 +2,298 @@
 <html lang="en">
 
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AK360 Virtual Tours</title>
 
-    <title>AK360 Virtual Tours</title>
+<style>
 
-    <meta name="description"
-        content="AK360 Virtual Tours - 360° Virtual Tours & Digital Marketing Services in Bangalore and across India.">
+/* RESET */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-    <style>
+body{
+font-family:Segoe UI,sans-serif;
+background:#050816;
+color:white;
+overflow-x:hidden;
+}
 
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
+/* 🌍 HERO */
+.hero{
+position:relative;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+overflow:hidden;
+}
 
-        :root{
-            --bg:#050816;
-            --bg2:#0d1224;
-            --card:rgba(255,255,255,0.05);
-            --text:#ffffff;
-            --sub:#b8b8c7;
-            --accent:#00d4ff;
-        }
+/* 🌍 EARTH */
+.earth{
+position:absolute;
+width:700px;
+height:700px;
+border-radius:50%;
 
-        body{
-            font-family:Segoe UI,sans-serif;
-            background:var(--bg);
-            color:white;
-            overflow-x:hidden;
-        }
+background:url('https://upload.wikimedia.org/wikipedia/commons/7/7f/Rotating_earth_animated_transparent.gif');
+background-size:cover;
 
-        html{
-            scroll-behavior:smooth;
-        }
+filter:brightness(1.8) contrast(1.2) saturate(1.4);
 
-        /* HERO */
+box-shadow:
+0 0 120px rgba(0,212,255,0.5),
+0 0 220px rgba(108,99,255,0.3);
 
-        .hero{
-            position:relative;
-            height:100vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            text-align:center;
-            overflow:hidden;
-        }
+animation:floatEarth 8s ease-in-out infinite;
+}
 
-        .earth{
-            position:absolute;
-            width:700px;
-            height:700px;
-            border-radius:50%;
-            background:url('https://upload.wikimedia.org/wikipedia/commons/7/7f/Rotating_earth_animated_transparent.gif');
-            background-size:cover;
-            background-position:center;
-            opacity:1;
-            box-shadow:
-                0 0 100px rgba(0,212,255,0.5),
-                0 0 200px rgba(108,99,255,0.3);
+@keyframes floatEarth{
+0%{transform:translateY(0px);}
+50%{transform:translateY(-15px) scale(1.03);}
+100%{transform:translateY(0px);}
+}
 
-            animation:floatEarth 8s ease-in-out infinite;
-        }
+/* OVERLAY */
+.overlay{
+position:absolute;
+inset:0;
+background:radial-gradient(circle,rgba(5,8,22,0.1),rgba(5,8,22,0.95));
+}
 
-        @keyframes floatEarth{
-            0%{
-                transform:translateY(0px) scale(1);
-            }
-            50%{
-                transform:translateY(-15px) scale(1.03);
-            }
-            100%{
-                transform:translateY(0px) scale(1);
-            }
-        }
+/* HERO TEXT */
+.hero-content{
+position:relative;
+z-index:10;
+}
 
-        .overlay{
-            position:absolute;
-            inset:0;
-            background:
-                radial-gradient(circle,
-                rgba(5,8,22,0.1) 0%,
-                rgba(5,8,22,0.95) 80%);
-        }
+.logo-text{
+font-size:5rem;
+font-weight:900;
+color:#00f7ff;
+text-shadow:
+0 0 10px #00f7ff,
+0 0 25px #00d4ff,
+0 0 60px #6c63ff;
+animation:neonPulse 2.5s infinite alternate;
+}
 
-        .hero-content{
-            position:relative;
-            z-index:10;
-            padding:20px;
-        }
+@keyframes neonPulse{
+0%{text-shadow:0 0 10px #00f7ff;}
+100%{text-shadow:0 0 40px #00d4ff;}
+}
 
-        .logo-text{
-            font-size:5rem;
-            font-weight:900;
-            background:linear-gradient(135deg,#00d4ff,#6c63ff);
-            -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent;
-        }
+/* SECTION */
+.section-title{
+text-align:center;
+font-size:2.5rem;
+margin:40px 0;
+}
 
-        .tagline{
-            margin-top:15px;
-            font-size:1.3rem;
-            color:var(--sub);
-        }
+/* CATEGORIES */
+.categories-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:40px;
+}
 
-        /* DEMO */
+.category-card{
+background:rgba(255,255,255,0.05);
+border-radius:20px;
+overflow:hidden;
+cursor:pointer;
+transition:0.3s;
+}
 
-        .demo-section{
-            padding:80px 20px;
-            text-align:center;
-            background:var(--bg2);
-        }
+.category-card:hover{
+transform:translateY(-10px);
+border:1px solid #00d4ff;
+}
 
-        .demo-btn{
-            display:inline-block;
-            padding:18px 45px;
-            border-radius:50px;
-            text-decoration:none;
-            font-weight:bold;
-            color:black;
-            background:linear-gradient(135deg,#00d4ff,#6c63ff);
-            transition:0.3s;
-        }
+.category-image{
+width:100%;
+height:160px;
+object-fit:cover;
+}
 
-        .demo-btn:hover{
-            transform:translateY(-5px);
-            box-shadow:0 10px 30px rgba(0,212,255,0.4);
-        }
+.category-name{
+padding:15px;
+text-align:center;
+}
 
-        /* SECTION */
+/* ACTIVE */
+.category-card.active{
+border:1px solid #00f7ff;
+transform:scale(1.03);
+}
 
-        .section-title{
-            text-align:center;
-            font-size:2.5rem;
-            margin-bottom:50px;
-        }
+/* TOURS */
+.tours-section{
+padding:50px 20px;
+background:#0d1224;
+}
 
-        /* CATEGORIES */
+.tours-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:20px;
+}
 
-        .categories-section{
-            padding:80px 20px;
-        }
+/* TOUR CARD */
+.tour-card{
+position:relative;
+background:rgba(255,255,255,0.05);
+border-radius:20px;
+overflow:hidden;
+}
 
-        .categories-grid{
-            max-width:1200px;
-            margin:auto;
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-            gap:25px;
-        }
+/* DETAILS BUTTON */
+.details-btn{
+position:absolute;
+top:10px;
+right:10px;
+padding:6px 10px;
+font-size:12px;
+text-decoration:none;
+color:#00f7ff;
 
-        .category-card{
-            background:var(--card);
-            border-radius:25px;
-            overflow:hidden;
-            cursor:pointer;
-            transition:0.4s;
-            border:1px solid rgba(255,255,255,0.08);
-            backdrop-filter:blur(10px);
-        }
+background:rgba(0,0,0,0.6);
+border:1px solid #00f7ff;
+border-radius:20px;
 
-        .category-card:hover{
-            transform:translateY(-10px);
-            border-color:rgba(0,212,255,0.4);
-        }
+animation:glow 1.5s infinite alternate;
+}
 
-        .category-image{
-            width:100%;
-            height:170px;
-            object-fit:cover;
-        }
+@keyframes glow{
+0%{box-shadow:0 0 5px #00d4ff;}
+100%{box-shadow:0 0 20px #00f7ff;}
+}
 
-        .category-name{
-            padding:18px;
-            text-align:center;
-            font-size:1.1rem;
-            font-weight:bold;
-            letter-spacing:1px;
-        }
+.tour-thumbnail{
+width:100%;
+height:200px;
+object-fit:cover;
+}
 
-        /* TOURS */
+.tour-content{
+padding:15px;
+}
 
-        .tours-section{
-            padding:80px 20px;
-            background:var(--bg2);
-        }
+.tour-btn{
+display:block;
+margin-top:10px;
+text-align:center;
+padding:10px;
+background:linear-gradient(135deg,#00d4ff,#6c63ff);
+color:black;
+font-weight:bold;
+border-radius:10px;
+text-decoration:none;
+}
 
-        .tours-grid{
-            max-width:1200px;
-            margin:auto;
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-            gap:30px;
-        }
-
-        .tour-card{
-            background:var(--card);
-            border-radius:20px;
-            overflow:hidden;
-            transition:0.3s;
-        }
-
-        .tour-card:hover{
-            transform:translateY(-8px);
-        }
-
-        .tour-thumbnail{
-            width:100%;
-            height:230px;
-            object-fit:cover;
-        }
-
-        .tour-content{
-            padding:20px;
-        }
-
-        .tour-title{
-            font-size:1.3rem;
-            margin-bottom:10px;
-        }
-
-        .tour-description{
-            color:var(--sub);
-            margin-bottom:20px;
-            line-height:1.6;
-        }
-
-        .tour-btn{
-            display:block;
-            text-align:center;
-            padding:14px;
-            border-radius:12px;
-            text-decoration:none;
-            color:black;
-            font-weight:bold;
-            background:linear-gradient(135deg,#00d4ff,#6c63ff);
-        }
-
-        /* FOOTER */
-
-        footer{
-            padding:50px 20px;
-            text-align:center;
-            background:#03050d;
-            color:var(--sub);
-        }
-
-        footer a{
-            color:#00d4ff;
-            text-decoration:none;
-        }
-
-        /* WHATSAPP */
-
-        .whatsapp-btn{
-            position:fixed;
-            right:20px;
-            bottom:20px;
-            background:#25d366;
-            color:white;
-            padding:15px 22px;
-            border-radius:50px;
-            text-decoration:none;
-            font-weight:bold;
-            z-index:999;
-            box-shadow:0 10px 25px rgba(0,0,0,0.3);
-        }
-
-        /* MOBILE */
-
-        @media(max-width:768px){
-
-            .earth{
-                width:450px;
-                height:450px;
-            }
-
-            .logo-text{
-                font-size:3rem;
-            }
-
-            .tagline{
-                font-size:1rem;
-            }
-
-            .section-title{
-                font-size:2rem;
-            }
-        }
-
-    </style>
-
+</style>
 </head>
 
 <body>
 
-    <!-- HERO -->
+<!-- HERO -->
+<section class="hero">
+<div class="earth"></div>
+<div class="overlay"></div>
 
-    <section class="hero">
+<div class="hero-content">
+<h1 class="logo-text">AK360</h1>
+</div>
+</section>
 
-        <div class="earth"></div>
+<h2 class="section-title">Explore Categories</h2>
 
-        <div class="overlay"></div>
+<div class="categories-grid">
 
-        <div class="hero-content">
+<div class="category-card" data-category="apartments">
+<img class="category-image" src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800">
+<div class="category-name">Apartments</div>
+</div>
 
-            <h1 class="logo-text">AK360</h1>
+<div class="category-card" data-category="hotel">
+<img class="category-image" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800">
+<div class="category-name">Hotels</div>
+</div>
 
-            <p class="tagline">
-                Immersive 360° Virtual Tours & Digital Marketing
-            </p>
+</div>
 
-        </div>
+<section class="tours-section">
 
-    </section>
+<h2 class="section-title" id="title">Select Category</h2>
 
-    <!-- DEMO -->
+<div class="tours-grid" id="grid"></div>
 
-    <section class="demo-section">
+</section>
 
-        <a href="https://ak360bglr1.pages.dev/tour/demo/"
-            target="_blank"
-            class="demo-btn">
+<script>
 
-            Quick Demo
+const data={
+apartments:[
+{
+title:"Luxury Apartment",
+desc:"Premium 360° apartment tour",
+img:"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800",
+url:"#",
+details:"details.html"
+}
+],
+hotel:[
+{
+title:"Luxury Hotel",
+desc:"5-star hotel walkthrough",
+img:"https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
+url:"#",
+details:"details.html"
+}
+]
+};
 
-        </a>
+const cards=document.querySelectorAll(".category-card");
+const grid=document.getElementById("grid");
+const title=document.getElementById("title");
 
-    </section>
+cards.forEach(c=>{
+c.onclick=()=>{
 
-    <!-- CATEGORIES -->
+cards.forEach(x=>x.classList.remove("active"));
+c.classList.add("active");
 
-    <section class="categories-section">
+let cat=c.dataset.category;
+title.innerText=cat.toUpperCase()+" TOURS";
 
-        <h2 class="section-title">
-            Explore Categories
-        </h2>
+grid.innerHTML=data[cat].map(t=>`
+<div class="tour-card">
 
-        <div class="categories-grid">
+<a class="details-btn" href="${t.details}">
+✨ Get Details
+</a>
 
-            <div class="category-card" data-category="hotel">
+<img class="tour-thumbnail" src="${t.img}">
 
-                <img class="category-image"
-                    src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800"
-                    alt="Hotel">
+<div class="tour-content">
+<h3>${t.title}</h3>
+<p>${t.desc}</p>
+<a class="tour-btn" href="${t.url}">View Tour</a>
+</div>
 
-                <div class="category-name">HOTELS</div>
+</div>
+`).join("");
 
-            </div>
+}
+});
 
-            <div class="category-card" data-category="gym">
-
-                <img class="category-image"
-                    src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800"
-                    alt="Gym">
-
-                <div class="category-name">GYMS</div>
-
-            </div>
-
-            <div class="category-card" data-category="apartments">
-
-                <img class="category-image"
-                    src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800"
-                    alt="Apartments">
-
-                <div class="category-name">APARTMENTS</div>
-
-            </div>
-
-            <div class="category-card" data-category="flats">
-
-                <img class="category-image"
-                    src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800"
-                    alt="Flats">
-
-                <div class="category-name">FLATS</div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- TOURS -->
-
-    <section class="tours-section">
-
-        <h2 class="section-title" id="tours-title">
-
-            Select a Category
-
-        </h2>
-
-        <div class="tours-grid" id="tours-grid"></div>
-
-    </section>
-
-    <!-- FOOTER -->
-
-    <footer>
-
-        <p>© 2025 AK360 Virtual Tours. All rights reserved.</p>
-
-        <br>
-
-        <p>📞 +91 7306639732</p>
-
-        <p>📍 Bangalore | All India</p>
-
-        <br>
-
-        <p>
-
-            ▶
-            <a href="https://www.youtube.com/channel/UCaWqDmJPPrY_t8WSLYSO-eQ"
-                target="_blank">
-
-                YouTube Channel
-
-            </a>
-
-        </p>
-
-    </footer>
-
-    <!-- WHATSAPP -->
-
-    <a href="https://wa.me/917306639732?text=Hi%20AK360%2C%20I%20need%20a%20360%C2%B0%20virtual%20tour"
-        target="_blank"
-        class="whatsapp-btn">
-
-        WhatsApp
-
-    </a>
-
-    <!-- SCRIPT -->
-
-    <script>
-
-        const toursData = {
-
-            hotel: [
-                {
-                    title: "Luxury Hotel Tour",
-                    description: "Explore premium hotel spaces in immersive 360° experience.",
-                    thumbnail: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
-                    url: "https://ak360bglr1.pages.dev/tour/h001/"
-                }
-            ],
-
-            gym: [
-                {
-                    title: "Modern Gym Tour",
-                    description: "Professional gym walkthrough with interactive virtual experience.",
-                    thumbnail: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800",
-                    url: "https://ak360bglr1.pages.dev/tour/g001/"
-                }
-            ],
-
-            apartments: [
-                {
-                    title: "AK360 Apartment Tour",
-                    description: "Interactive 360° apartment walkthrough experience.",
-                    thumbnail: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800",
-                    url: "https://ak360bglr1.pages.dev/tour/b001/"
-                }
-            ],
-
-            flats: [
-                {
-                    title: "Premium Flat Tour",
-                    description: "Modern flat walkthrough experience.",
-                    thumbnail: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800",
-                    url: "https://ak360bglr1.pages.dev/tour/f001/"
-                }
-            ]
-
-        };
-
-        const categoryCards =
-            document.querySelectorAll(".category-card");
-
-        const toursGrid =
-            document.getElementById("tours-grid");
-
-        const toursTitle =
-            document.getElementById("tours-title");
-
-        categoryCards.forEach(card => {
-
-            card.addEventListener("click", () => {
-
-                categoryCards.forEach(c =>
-                    c.classList.remove("active")
-                );
-
-                card.classList.add("active");
-
-                const category =
-                    card.dataset.category;
-
-                toursTitle.innerText =
-                    category.toUpperCase() + " TOURS";
-
-                renderTours(category);
-
-                document.querySelector(".tours-section")
-                    .scrollIntoView({
-                        behavior: "smooth"
-                    });
-
-            });
-
-        });
-
-        function renderTours(category) {
-
-            const tours =
-                toursData[category] || [];
-
-            toursGrid.innerHTML =
-                tours.map(tour => `
-
-                <div class="tour-card">
-
-                    <img class="tour-thumbnail"
-                        src="${tour.thumbnail}">
-
-                    <div class="tour-content">
-
-                        <h3 class="tour-title">
-                            ${tour.title}
-                        </h3>
-
-                        <p class="tour-description">
-                            ${tour.description}
-                        </p>
-
-                        <a href="${tour.url}"
-                            target="_blank"
-                            class="tour-btn">
-
-                            View Tour
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            `).join("");
-
-        }
-
-    </script>
+</script>
 
 </body>
-
 </html>
