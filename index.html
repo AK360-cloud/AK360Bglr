@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,113 +7,68 @@
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
 font-family:Segoe UI;
 background:#050816;
 color:white;
-overflow-x:hidden;
 }
 
 /* HERO */
 .hero{
-position:relative;
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
+position:relative;
 text-align:center;
-overflow:hidden;
 }
 
-/* 🌍 BRIGHTER EARTH + NEON GLOW FIX */
 .earth{
 position:absolute;
-width:650px;
-height:650px;
+width:600px;
+height:600px;
 border-radius:50%;
 background:url('https://upload.wikimedia.org/wikipedia/commons/7/7f/Rotating_earth_animated_transparent.gif');
 background-size:cover;
-background-position:center;
-
-/* FIX: brighter + no dull look */
-filter: brightness(1.4) contrast(1.2);
-
-/* neon glow upgrade */
-box-shadow:
-0 0 80px #00d4ff,
-0 0 160px #ff00e6,
-0 0 220px rgba(0,212,255,0.4);
-
+filter:brightness(1.6) contrast(1.2);
 animation:float 8s infinite ease-in-out;
 }
 
-/* floating */
 @keyframes float{
 0%{transform:translateY(0);}
 50%{transform:translateY(-15px);}
 100%{transform:translateY(0);}
 }
 
-/* background glow layer */
-.hero::before{
-content:"";
-position:absolute;
-width:100%;
-height:100%;
-background:
-radial-gradient(circle at center, rgba(0,212,255,0.15), transparent 60%),
-radial-gradient(circle at top, rgba(255,0,230,0.12), transparent 70%);
-}
-
-/* LOGO FIX (BLUE + PINK NEON) */
-.logo-text{
-font-size:5rem;
-font-weight:900;
-background:linear-gradient(90deg,#00d4ff,#ff00e6);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-
-text-shadow:
-0 0 10px #00d4ff,
-0 0 25px #ff00e6,
-0 0 45px #00d4ff;
-
-letter-spacing:3px;
-animation:glow 2s infinite alternate;
-}
-
-@keyframes glow{
-0%{filter:brightness(1);}
-100%{filter:brightness(1.4);}
-}
-
-/* other unchanged */
 .overlay{
 position:absolute;
 inset:0;
 background:radial-gradient(circle,rgba(5,8,22,0.1),rgba(5,8,22,0.95));
 }
 
-.hero-content{
+/* LOGO */
+.logo{
+font-size:5rem;
+font-weight:900;
+color:#b400ff;
+text-shadow:0 0 10px #b400ff,0 0 40px #7a00ff;
+animation:neon 2.5s infinite alternate;
+z-index:2;
 position:relative;
-z-index:10;
 }
 
-.tagline{
-margin-top:10px;
-color:#b8b8c7;
+@keyframes neon{
+0%{text-shadow:0 0 10px #b400ff;}
+100%{text-shadow:0 0 40px #7a00ff;}
 }
 
 /* GRID */
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
 gap:20px;
 padding:30px;
 }
@@ -130,13 +84,17 @@ text-align:center;
 
 .card:hover{
 transform:translateY(-10px);
-border:1px solid #ff00e6;
+border:1px solid #b400ff;
 }
 
 .card img{
 width:100%;
-height:140px;
+height:130px;
 object-fit:cover;
+}
+
+.card h3{
+padding:10px;
 }
 
 /* TOURS */
@@ -152,52 +110,56 @@ gap:20px;
 }
 
 .tour-card{
+position:relative;
 background:rgba(255,255,255,0.05);
 border-radius:15px;
 overflow:hidden;
-position:relative;
 }
 
-/* buttons */
-.tour-btn{
-display:block;
-margin:10px;
-padding:10px;
-text-align:center;
-background:linear-gradient(90deg,#00d4ff,#ff00e6);
-color:white;
-border-radius:10px;
-text-decoration:none;
-}
-
+/* GET DETAILS */
 .details-btn{
 position:absolute;
 top:10px;
 right:10px;
 padding:6px 10px;
 font-size:12px;
+color:#b400ff;
+border:1px solid #b400ff;
 border-radius:20px;
-color:#ff00e6;
-border:1px solid #ff00e6;
-background:rgba(0,0,0,0.6);
 text-decoration:none;
+background:rgba(0,0,0,0.6);
+animation:glow 1.5s infinite alternate;
 }
 
-/* WhatsApp */
-.whatsapp{
+@keyframes glow{
+0%{box-shadow:0 0 5px #b400ff;}
+100%{box-shadow:0 0 20px #7a00ff;}
+}
+
+.tour-img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.tour-content{
+padding:15px;
+}
+
+.tour-btn{
 display:block;
-margin:10px;
-padding:8px;
-background:#25d366;
-color:white;
+margin-top:10px;
 text-align:center;
-border-radius:8px;
+padding:10px;
+background:linear-gradient(135deg,#b400ff,#7a00ff);
+color:white;
+border-radius:10px;
 text-decoration:none;
 }
 
 .section-title{
 text-align:center;
-margin:20px;
+margin:20px 0;
 font-size:2rem;
 }
 
@@ -210,16 +172,16 @@ font-size:2rem;
 <section class="hero">
 <div class="earth"></div>
 <div class="overlay"></div>
-<h1 class="logo-text">AK360</h1>
+<h1 class="logo">AK360</h1>
 </section>
 
-<h2 class="section-title">Categories</h2>
+<h2 class="section-title">Explore Categories</h2>
 
 <div class="grid">
 
-<div class="card" onclick="load('apartments')">
-<img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800">
-<h3>Apartments</h3>
+<div class="card" onclick="load('gyms')">
+<img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800">
+<h3>Gyms</h3>
 </div>
 
 <div class="card" onclick="load('hotels')">
@@ -227,13 +189,44 @@ font-size:2rem;
 <h3>Hotels</h3>
 </div>
 
-<div class="card" onclick="load('gyms')">
-<img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800">
-<h3>Gyms</h3>
+<div class="card" onclick="load('restaurants')">
+<img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800">
+<h3>Restaurants</h3>
+</div>
+
+<div class="card" onclick="load('apartments')">
+<img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800">
+<h3>Apartments</h3>
+</div>
+
+<div class="card" onclick="load('flats')">
+<img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800">
+<h3>Flats</h3>
+</div>
+
+<div class="card" onclick="load('hospitals')">
+<img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=800">
+<h3>Hospitals</h3>
+</div>
+
+<div class="card" onclick="load('spas')">
+<img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800">
+<h3>Spas</h3>
+</div>
+
+<div class="card" onclick="load('salons')">
+<img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800">
+<h3>Salons</h3>
+</div>
+
+<div class="card" onclick="load('others')">
+<img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800">
+<h3>Others</h3>
 </div>
 
 </div>
 
+<!-- TOURS -->
 <section class="tours">
 <h2 class="section-title" id="title">Select Category</h2>
 <div class="tour-grid" id="grid"></div>
@@ -243,52 +236,65 @@ font-size:2rem;
 
 const data = {
 
+gyms:[
+{ id:"g1", title:"Modern Gym", desc:"360° gym tour", img:"https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800" }
+],
+
+hotels:[
+{ id:"h1", title:"Luxury Hotel", desc:"5 star hotel tour", img:"https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800" }
+],
+
+restaurants:[
+{ id:"r1", title:"Fine Dining", desc:"Restaurant virtual tour", img:"https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800" }
+],
+
 apartments:[
-{
-id:"b001",
-title:"Luxury Apartment",
-desc:"Premium 360° tour",
-img:"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800",
-tour:"https://ak360bglr1.pages.dev/tour/b001/",
-map:"https://maps.google.com"
-}
+{ id:"a1", title:"Luxury Apartment", desc:"Modern apartment tour", img:"https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800" }
+],
+
+flats:[
+{ id:"f1", title:"Premium Flat", desc:"Flat walkthrough", img:"https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800" }
+],
+
+hospitals:[
+{ id:"hp1", title:"Hospital Tour", desc:"Healthcare facility tour", img:"https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=800" }
+],
+
+spas:[
+{ id:"s1", title:"Luxury Spa", desc:"Relaxing spa tour", img:"https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800" }
+],
+
+salons:[
+{ id:"sl1", title:"Salon Tour", desc:"Beauty salon walkthrough", img:"https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=800" }
+],
+
+others:[
+{ id:"o1", title:"Other Spaces", desc:"Misc virtual tour", img:"https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800" }
 ]
 
 };
 
 function load(cat){
 
-document.getElementById("title").innerText = cat.toUpperCase();
+document.getElementById("title").innerText = cat.toUpperCase()+" TOURS";
 
 document.getElementById("grid").innerHTML =
 data[cat].map(t=>`
-
 <div class="tour-card">
 
-<a class="details-btn"
-href="details.html?id=${t.id}&title=${encodeURIComponent(t.title)}">
+<a class="details-btn" href="details.html?id=${t.id}">
 ✨ Get Details
 </a>
 
-<img src="${t.img}" style="width:100%;height:180px;object-fit:cover;">
+<img class="tour-img" src="${t.img}">
 
-<h3 style="padding:10px;">${t.title}</h3>
-
-<p style="padding:0 10px;">${t.desc}</p>
-
-<a class="tour-btn" href="${t.tour}" target="_blank">
-View Tour
-</a>
-
-<!-- NEW CONTACT BUTTON -->
-<a class="tour-btn"
-style="background:linear-gradient(90deg,#ff00e6,#00d4ff);"
-href="${t.map}" target="_blank">
-📍 Contact / Location
-</a>
-
+<div class="tour-content">
+<h3>${t.title}</h3>
+<p>${t.desc}</p>
+<a class="tour-btn" href="#">View Tour</a>
 </div>
 
+</div>
 `).join("");
 
 }
