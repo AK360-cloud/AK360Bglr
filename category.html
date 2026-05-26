@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>AK360 Tours</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Segoe UI,sans-serif;
+
+background:#050816;
+color:white;
+
+padding:30px;
+}
+
+/* TITLE */
+h1{
+text-align:center;
+margin-bottom:40px;
+
+font-size:2.5rem;
+
+background:linear-gradient(90deg,#00d4ff,#ff4df0);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+/* GRID */
+.grid{
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(280px,1fr));
+
+gap:25px;
+}
+
+/* CARD */
+.card{
+background:rgba(255,255,255,0.05);
+
+border-radius:18px;
+
+overflow:hidden;
+
+border:1px solid rgba(255,255,255,0.08);
+
+transition:0.35s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+
+border-color:#00d4ff;
+
+box-shadow:0 0 25px rgba(0,212,255,0.25);
+}
+
+/* IMAGE */
+.card img{
+width:100%;
+height:220px;
+object-fit:cover;
+}
+
+/* CONTENT */
+.content{
+padding:20px;
+}
+
+.content h2{
+margin-bottom:10px;
+}
+
+.content p{
+color:#bfc8d8;
+line-height:1.6;
+}
+
+/* BUTTON */
+.btn{
+display:inline-block;
+
+margin-top:18px;
+
+padding:12px 18px;
+
+border-radius:10px;
+
+text-decoration:none;
+color:white;
+
+background:
+linear-gradient(90deg,#00d4ff,#ff4df0);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+
+body{
+padding:20px;
+}
+
+h1{
+font-size:2rem;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<h1 id="title">
+TOURS
+</h1>
+
+<div class="grid" id="grid"></div>
+
+<script>
+
+const data={
+
+gyms:[
+
+{
+title:"Modern Gym",
+desc:"Premium 360° fitness walkthrough experience.",
+
+img:"https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800",
+
+url:"tours/gyms/gym1/index.html"
+},
+
+{
+title:"Power Fitness",
+desc:"Luxury gym virtual experience.",
+
+img:"https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800",
+
+url:"tours/gyms/gym2/index.html"
+}
+
+],
+
+hotels:[
+
+{
+title:"Luxury Hotel",
+desc:"5 star premium hotel virtual tour.",
+
+img:"https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800",
+
+url:"tours/hotels/hotel1/index.html"
+}
+
+],
+
+restaurants:[
+
+{
+title:"Fine Dining",
+desc:"Restaurant immersive experience.",
+
+img:"https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800",
+
+url:"tours/restaurants/rest1/index.html"
+}
+
+]
+
+};
+
+const params =
+new URLSearchParams(window.location.search);
+
+const cat = params.get("cat");
+
+document.getElementById("title").innerText =
+cat.toUpperCase() + " TOURS";
+
+document.getElementById("grid").innerHTML =
+data[cat].map(t => `
+
+<div class="card">
+
+<img src="${t.img}">
+
+<div class="content">
+
+<h2>${t.title}</h2>
+
+<p>${t.desc}</p>
+
+<a class="btn"
+href="${t.url}">
+
+View Tour
+
+</a>
+
+</div>
+
+</div>
+
+`).join("");
+
+</script>
+
+</body>
+</html>
