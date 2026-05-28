@@ -1,8 +1,8 @@
 var APP_DATA = {
   "scenes": [
     {
-      "id": "0-uruli-front-view_exported",
-      "name": "Uruli Front View_exported",
+      "id": "0-uruli-restaurant-electronic-city",
+      "name": "Uruli Restaurant Electronic City",
       "levels": [
         {
           "tileSize": 256,
@@ -77,13 +77,13 @@ var APP_DATA = {
           "yaw": -3.043672509822825,
           "pitch": 0.5110933357912586,
           "rotation": 4.71238898038469,
-          "target": "0-uruli-front-view_exported"
+          "target": "0-uruli-restaurant-electronic-city"
         },
         {
           "yaw": 0.4888444841491282,
           "pitch": 0.4373811194727377,
           "rotation": 7.853981633974483,
-          "target": "0-uruli-front-view_exported"
+          "target": "0-uruli-restaurant-electronic-city"
         }
       ],
       "infoHotspots": []
